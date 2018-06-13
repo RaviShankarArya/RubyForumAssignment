@@ -7,9 +7,12 @@ class CommentsController < ApplicationController
 			@comment = @post.comments.build(comment_params)
 			@comment.user_id = current_user.id
 			if @comment.valid? && @comment.save!
+				flash[:success]	=	"post Created Successfully!"
 			else
+				flash[:success]	=	@comment.errors.messages
 			end
 		else
+			flash[:error] = "Post is not present"
 		end
 		redirect_to forum_post_path(@post.forum,@post)
 	end
@@ -20,7 +23,6 @@ class CommentsController < ApplicationController
 	def update
 		if @comment.present?
 			@comment.update_attributes(comment_params)
-		else
 		end
 		redirect_to forum_post_path(@post.forum,@post)
 	end

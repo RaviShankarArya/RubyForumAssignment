@@ -11,11 +11,12 @@ class PostsController < ApplicationController
 			@post = @forum.posts.build(post_params)
 			@post.user_id = current_user.id
 			if @post.valid? && @post.save!
-
+				flash[:success]	=	"post Created Successfully!"
 			else
-
+				flash[:error] = @post.errors.messages
 			end
 		else
+			flash[:error] = "Forum is not present"
 		end
 		redirect_to forum_path(@forum)
 	end
@@ -31,7 +32,6 @@ class PostsController < ApplicationController
 	def update
 		if @post.present?
 			@post.update_attributes(post_params)
-		else
 		end
 		redirect_to forum_path(@forum)
 	end
