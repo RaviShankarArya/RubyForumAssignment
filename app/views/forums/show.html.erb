@@ -1,0 +1,22 @@
+<h4><%= @forum.name %></h4>
+<table class="table table-striped">
+	<tr>
+		<th>Posts</th>
+		<th colspan="3">Actions</th>
+	</tr>
+  <% @posts.each do |post| %>
+  <tr>
+  	<td>
+    <h4><%= link_to h(post.name), forum_post_path(post.forum,post) %></h4>
+        <span><%= post.content %></span>
+    </td>
+    <% if can? :update, post %>
+    	<td><%= link_to "Edit", edit_forum_post_path(post.forum,post) %></td>
+    	<td><%= link_to "Delete", forum_post_path(post.forum,post), data: { confirm: 'Are you sure?' }, :method => :delete %></td>
+    <% end %>
+    </tr>
+  </tr>
+  <% end %>
+</table>
+<br/>
+<p><%= link_to "New Post", new_forum_post_path(@forum) %></p>

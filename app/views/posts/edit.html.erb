@@ -1,0 +1,5 @@
+<%= form_for @post, :as => :post,:method => :put, :url => forum_post_path(@forum,@post) do |f| %>
+	Name: <%= f.text_field :name %><br/>
+	Content: <%= f.text_area :content %><br/>
+	<%=f.submit "Update" %>
+<% end %>

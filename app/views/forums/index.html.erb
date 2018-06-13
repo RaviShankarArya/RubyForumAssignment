@@ -1,0 +1,12 @@
+<div class="row container-fluid">
+  <% @forums.each do |forum| %>
+  <div class="col-xs-12">
+    <h4><%= link_to h(forum.name), forum_path(forum.id) %></h4>
+        <span><%= forum.description %></span>
+  </div>      
+  <% end %>
+</div>
+<br/>
+<% if can? :create, @forum %> 
+<p><%= link_to "New Forum", new_forum_path %></p>
+<% end %>
